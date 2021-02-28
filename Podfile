@@ -7,5 +7,7 @@ target 'RestaurantApp' do
 
   # Pods for RestaurantApp
       pod 'Alamofire', '~> 5.0'
+      pod 'Kingfisher'
+
 
 end

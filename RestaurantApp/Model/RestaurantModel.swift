@@ -20,6 +20,7 @@ struct RestaurantInfo : Codable {
     let user_rating: UserRating
     let name: String
     let cuisines : String
+    let featured_image : String
     let average_cost_for_two : Int
 }
 

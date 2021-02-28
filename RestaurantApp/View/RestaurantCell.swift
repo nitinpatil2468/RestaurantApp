@@ -16,8 +16,8 @@ class RestaurantCell: UICollectionViewCell {
         }
     }
 
-    let cardImage:UIImageView = {
-        let img = UIImageView()
+    let cardImage:LazyImageView = {
+        let img = LazyImageView()
         img.clipsToBounds = true
         img.contentMode = .scaleToFill
         img.layer.cornerRadius = 15.0
@@ -181,10 +181,19 @@ class RestaurantCell: UICollectionViewCell {
     
     func manageData(){
         guard let data = data else {return}
-        print("data  : \(data)")
-        if let img = Constant.imageArray.randomElement() {
-            cardImage.image = UIImage(named: img)
+        print("data  : \(data.restaurant.featured_image)")
+        
+        if data.restaurant.featured_image != ""{
+            if let url = URL(string:data.restaurant.featured_image){
+                print("featuredUrl : \(url)")
+                cardImage.loadImage(imageUrl: url)
+            }
+        }else{
+                    if let img = Constant.imageArray.randomElement() {
+                        cardImage.image = UIImage(named: img)
+                    }
         }
+
         titleLbl.text = data.restaurant.name
         let prize = data.restaurant.average_cost_for_two / 2
         priceLabel.text = "\("\u{20B9}") \(prize) for one"
